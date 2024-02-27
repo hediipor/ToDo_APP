@@ -1,25 +1,60 @@
-var express = require("express")
-var mongoclient = require("mongodb").MongoClient;
-var cors =require( "cors");
-const multer = require("multer")
-
-var app=express();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require('cors');
+const app = express();
 app.use(cors());
 
-var CONNECTION_STRING = "mongodb+srv://admin:admin@cluster0.nawkt1k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-                        
-var DATA_BASE_NAME = "todo-app"
-var database;
+const PORT = 3001;
 
-app.listen(3000 , () => {
-    mongoclient.connect(CONNECTION_STRING , (error , client) =>{
-        database = client.db(DATA_BASE_NAME);
-        console.log("connected to server");
-    })
-})
+const URI = "mongodb://localhost:27017/todo-app";
 
-app.get( '/api/todoapp/getlists', (request, response) =>{
-    database.collection('lists').find({}).toArray((error, result)=>{
-        response.send(result);
-    })
-})
+const database = "todo-app";
+
+const CardSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    ListID: {
+        type: String,
+        required: true
+    }
+});
+
+const ListSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    cards: [CardSchema] // Embed Card documents in the cards array
+});
+
+const List = mongoose.model('List', ListSchema, 'List');
+const Cards = mongoose.model('Card', CardSchema);
+async  function connectDB() {
+    try{
+        await mongoose.connect(URI);
+        console.log('MongoDB Connected');
+    }catch(error){
+        console.log('Error connecting to the database: ', error);
+    }
+}
+
+connectDB();
+app.use(express.json());
+
+app.get("/getlists", async (request, response) => {
+    try {
+        const lists = await List.find().lean();
+        console.log('Lists from MongoDB:', lists);
+        response.json(lists);
+    } catch (error) {
+        console.log("Error getting lists: ", error);
+        response.status(500).send("Server Error");
+    }
+});
+
+
+app.listen(PORT, ()=>{
+    console.log("Server is running on port " + PORT)
+});
