@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require('cors');
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 const PORT = 3001;
 
@@ -30,7 +31,6 @@ const ListSchema = new mongoose.Schema({
 });
 
 const List = mongoose.model('List', ListSchema, 'List');
-const Cards = mongoose.model('Card', CardSchema);
 async  function connectDB() {
     try{
         await mongoose.connect(URI);
@@ -53,9 +53,27 @@ app.get("/getlists", async (request, response) => {
     }
 });
 
+app.get("/getListById/:id", async (request, response) => {
+    try {
+        const listId = request.params.id;
+        if (!listId) {
+            return response.status(400).json({ error: 'List ID is required for getting a list' });
+        }
+        const list = await List.findById(listId).lean();
+        if (!list) {
+            return response.status(404).json({ error: 'List not found' });
+        }
+        response.json(list);
+    } catch (error) {
+        console.error("Error getting list by id: ", error);
+        response.status(500).send("Server Error");
+    }
+});
+
 app.post("/addList", async (request, response) => {
     try {
         const { name } = request.body;
+        console.log('Name from request:', name);
         if (!name) {
             return response.status(400).json({ error: 'Name is required for a new list' });
         }
@@ -85,7 +103,6 @@ app.delete("/deleteList/:id", async (request, response) => {
         response.status(500).send("Server Error");
     }
 });
-
 
 app.listen(PORT, ()=>{
     console.log("Server is running on port " + PORT)

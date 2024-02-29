@@ -1,0 +1,48 @@
+<div></div>
+<div class="body">
+  <h2 class="text-center">Example Board</h2>
+  <div class="grid-container" *ngFor="let list of lists">
+    <div class="list">
+      <div class="header">
+        <table>
+          <th>
+            <h3 class="listName">{{ list.listName }}</h3>
+            <button type="button" class="deleteBTNL">X</button>
+          </th>
+          <tr *ngFor="let item of list.cards">
+            <div>
+              {{ item }}
+              <button type="button" class="deleteBTN">X</button>
+              <button type="button" class="updateBTN">U</button>
+            </div>
+          </tr>
+          <tr>
+            <button>add card to list</button>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div>
+    <input type="text" id="newList" />
+    <button class="addList" (click)="addList()">Add new List</button>
+  </div>
+  <!-- <div class="container">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let list of lists">
+        <div class="card">
+          <div class="card-header">
+            {{ list.name }}
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let item of list.cards">
+                {{ item.name }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>
