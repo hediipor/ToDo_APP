@@ -23,9 +23,29 @@ export class ListsService {
     return this.http.get<ResponseModel>(url).pipe();
   }
 
-  addList(list: List): Observable<ListResponseModel<List>> {
-    return this.http
-      .post<ListResponseModel<List>>(this.apiURL + '/addList', list.listName)
-      .pipe();
+  deleteList(ListID: String): Observable<unknown> {
+    const url = `${this.apiURL}/deleteList/${ListID}`;
+    console.log('Delete URL : ', url);
+    alert('List deleted successfully');
+    return this.http.delete(url);
+  }
+
+  addCardsToList(listId: String, cards: String[]): Observable<any> {
+    const url = `${this.apiURL}/addCards/${listId}`;
+    return this.http.post(url, { cards });
+  }
+
+  deleteCardFromList(listId: String, cardName: String): Observable<any> {
+    const url = `${this.apiURL}/deleteCard/${listId}/${cardName}`;
+    return this.http.delete(url);
+  }
+
+  updateCard(
+    listId: String,
+    cardName: String,
+    newName: String
+  ): Observable<any> {
+    const url = `${this.apiURL}/updateCard/${listId}/${cardName}`;
+    return this.http.put(url, { newName });
   }
 }

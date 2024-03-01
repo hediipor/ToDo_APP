@@ -1,48 +1,77 @@
-<div></div>
+<div class="head"></div>
 <div class="body">
-  <h2 class="text-center">Example Board</h2>
-  <div class="grid-container" *ngFor="let list of lists">
-    <div class="list">
-      <div class="header">
-        <table>
-          <th>
-            <h3 class="listName">{{ list.listName }}</h3>
-            <button type="button" class="deleteBTNL">X</button>
-          </th>
-          <tr *ngFor="let item of list.cards">
-            <div>
-              {{ item }}
-              <button type="button" class="deleteBTN">X</button>
-              <button type="button" class="updateBTN">U</button>
-            </div>
-          </tr>
-          <tr>
-            <button>add card to list</button>
-          </tr>
-        </table>
-      </div>
+  <div class="text-center">
+    <h2>Example Board</h2>
+    <div>
+      <input type="text" id="newList" />
+      <button class="addList" (click)="addList()">Add new List</button>
     </div>
   </div>
-  <div>
-    <input type="text" id="newList" />
-    <button class="addList" (click)="addList()">Add new List</button>
-  </div>
-  <!-- <div class="container">
-    <div class="row">
-      <div class="col-md-4" *ngFor="let list of lists">
-        <div class="card">
-          <div class="card-header">
-            {{ list.name }}
-          </div>
-          <div class="card-body">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item" *ngFor="let item of list.cards">
-                {{ item.name }}
-              </li>
-            </ul>
-          </div>
+  <div class="conatiner">
+    <div class="grid-container" *ngFor="let list of lists">
+      <div class="list">
+        <div class="header">
+          <table class="table">
+            <th class="table-head">
+              <div class="title">{{ list.listName }}</div>
+              <button
+                type="button"
+                class="deleteListBTN"
+                (click)="deleteList(list._id)"
+              >
+                X
+              </button>
+            </th>
+            <tr class="Card-row" *ngFor="let item of list.cards" cdkDrag>
+              <div class="card">
+                <div class="cardItem">
+                  {{ item }}
+                </div>
+
+                <div class="cardButtons">
+                  <button
+                    type="button"
+                    class="deleteBTN"
+                    (click)="deleteCard(list._id, item)"
+                  >
+                    X
+                  </button>
+                  <button
+                    type="button"
+                    class="updateBTN"
+                    (click)="toggleEditing(list._id.toString(), item)"
+                  >
+                    U
+                  </button>
+                </div>
+
+                <div
+                  *ngIf="
+                    isEditing.get(list._id.toString())?.get(item.toString())
+                  "
+                >
+                  <input
+                    [(ngModel)]="newCardName"
+                    placeholder="New Card Name"
+                  />
+                  <button (click)="updateCard(list._id, item, newCardName)">
+                    Update Card
+                  </button>
+                  <button (click)="toggleEditing(list._id.toString(), item)">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </tr>
+            <tr class="addCardRow">
+              <input [(ngModel)]="newCard" placeholder="Enter a new card" />
+              <button class="addCard" (click)="addCardsToList(list._id)">
+                add card to list
+              </button>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </div>
