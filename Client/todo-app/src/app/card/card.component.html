@@ -1,0 +1,42 @@
+<tr class="Card-row" *ngFor="let item of CurrentList.cards" cdkDrag>
+  <div class="card">
+    <div class="cardItem">
+      {{ item }}
+    </div>
+
+    <div class="cardButtons">
+      <button
+        type="button"
+        class="deleteBTN"
+        (click)="deleteCard(CurrentList._id, item)"
+      >
+        X
+      </button>
+      <button
+        type="button"
+        class="updateBTN"
+        (click)="toggleEditing(CurrentList._id.toString(), item)"
+      >
+        U
+      </button>
+    </div>
+
+    <div
+      *ngIf="isEditing.get(CurrentList._id.toString())?.get(item.toString())"
+    >
+      <input [(ngModel)]="newCardName" placeholder="New Card Name" />
+      <button (click)="updateCard(CurrentList._id, item, newCardName)">
+        Update Card
+      </button>
+      <button (click)="toggleEditing(CurrentList._id.toString(), item)">
+        Cancel
+      </button>
+    </div>
+  </div>
+</tr>
+<tr class="addCardRow">
+  <input [(ngModel)]="newCard" placeholder="Enter a new card" />
+  <button class="addCard" (click)="addCardsToList(CurrentList._id)">
+    add card to list
+  </button>
+</tr>

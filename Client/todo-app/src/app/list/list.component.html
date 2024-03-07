@@ -1,0 +1,30 @@
+<div class="addNewList">
+  <input
+    type="text"
+    id="newList"
+    [(ngModel)]="newListName"
+    placeholder="Enter a new list name"
+  />
+  <button class="" (click)="addList()">Add new List</button>
+</div>
+<div class="conatiner">
+  <div class="grid-container" *ngFor="let list of lists">
+    <div class="list">
+      <div class="header">
+        <table class="table">
+          <th class="table-head">
+            <div class="title">{{ list.listName }}</div>
+            <button
+              type="button"
+              class="deleteListBTN"
+              (click)="deleteList(list._id)"
+            >
+              X
+            </button>
+          </th>
+          <card [CurrentList]="list"></card>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

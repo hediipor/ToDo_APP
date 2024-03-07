@@ -1,0 +1,14 @@
+.head {
+  background-color: #8e99ed;
+
+  height: 60px;
+  margin: -16px -8px;
+}
+.text-center {
+  text-align: center;
+  font-size: 24px;
+  color: #fff;
+}
+.body {
+  background-color: #7b86db;
+}
