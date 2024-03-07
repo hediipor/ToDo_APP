@@ -1,83 +1,14 @@
-.head{
-   background-color: #8e99ed;
-      
-      height: 60px;
-      margin:  -16px -8px ;
-      
-     
-      
-}
-.text-center{
-   text-align: center; 
-   font-size: 24px;
-   color: #fff;
-   
-}
-.body{
-   background-color: #7b86db;
-}
+.head {
+  background-color: #8e99ed;
 
-.grid-container{
-   display: inline-grid;
-   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-   grid-template-rows: 450px;
-   gap: 5px;
-   
-   background-color: #7b86db;
-   padding: 5px  ;
+  height: 60px;
+  margin: -16px -8px;
 }
-
-.list{
-   flex: 0 0 27rem;
-      display: flex;
-      flex-direction: column;
-      background-color: white;
-      border-radius: 0.3rem;
-      margin-right: 1rem;
+.text-center {
+  text-align: center;
+  font-size: 24px;
+  color: #fff;
 }
-
-.table-head{
-   border: #4d4d4d solid 1px;
-   
-   margin-left: 0px;
-   display: flex;
-   justify-content: space-between;
-   
-}
-.title{
-   justify-content: space-between;
-   margin-left: 0%;
-   font-size: 1.4rem;
-   font-weight: 700;
-   line-height: 1.3;
-   padding: 0.65rem 0.6rem;
-   color: black;
-   word-wrap: break-word;
-      
-}
-.deleteListBTN {
-   float: right;
-   
-}
-
-.Card-row{
-font-size: 1.4rem;
-   font-weight: 400;
-   line-height: 1.3;
-   background-color: #fff;
-   padding: 0.65rem 0.6rem;
-   color: #4d4d4d;
-   border-bottom: 0.1rem solid #ccc;
-   border-radius: 0.3rem;
-   margin-bottom: 0.6rem;
-   word-wrap: break-word;
-   cursor: pointer
-}
-.card{
-   display: flex;
-}
-.cardButtons{
-   gap: .5rem;
-   display: flex;
-   margin-left: auto;
+.body {
+  background-color: #7b86db;
 }
