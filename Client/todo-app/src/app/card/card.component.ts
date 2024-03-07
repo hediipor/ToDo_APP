@@ -30,21 +30,26 @@ export class CardComponent {
   constructor(private listService: ListsService) {}
 
   addCardsToList(listID: String) {
-    const cards = [this.newCard];
-    this.listService.addCardsToList(listID, cards).subscribe(() => {
-      window.location.reload();
+    const card = this.newCard;
+    this.listService.addCardToList(listID, card).subscribe((card) => {
+      this.CurrentList.cards.push(card);
+      this.newCard = '';
     });
   }
 
   deleteCard(listId: String, cardName: String): void {
     this.listService.deleteCardFromList(listId, cardName).subscribe(() => {
-      window.location.reload();
+      this.CurrentList.cards = this.CurrentList.cards.filter(
+        (card) => card !== cardName
+      );
     });
   }
 
   updateCard(listId: String, cardName: String, newName: String): void {
     this.listService.updateCard(listId, cardName, newName).subscribe(() => {
-      window.location.reload();
+      this.CurrentList.cards = this.CurrentList.cards.map((card) =>
+        card === cardName ? newName : card
+      );
     });
   }
 

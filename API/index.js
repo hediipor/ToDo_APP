@@ -4,13 +4,15 @@ const cors = require("cors");
 const app = express();
 const listRoutes = require("./routes/list");
 const cardRoutes = require("./routes/card");
+const dotenv = require("dotenv");
 
+dotenv.config();
 app.use(cors());
 app.use(express.json());
 app.use("/list", listRoutes);
 app.use("/card", cardRoutes);
 
-const PORT = 3001;
+const PORT = process.env.PORT;
 
 connectDB();
 

@@ -34,9 +34,14 @@ export class ListsService {
     return this.http.delete(url);
   }
 
+  addCardToList(listId: String, card: String): Observable<any> {
+    const url = `${this.apiURL}/card/${listId}`;
+    return this.http.post(url, { card });
+  }
+
   addCardsToList(listId: String, cards: String[]): Observable<any> {
     const url = `${this.apiURL}/card/${listId}`;
-    return this.http.post(url, { cards });
+    return this.http.put(url, { cards });
   }
 
   deleteCardFromList(listId: String, cardName: String): Observable<any> {

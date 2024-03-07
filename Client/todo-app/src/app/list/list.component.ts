@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { List } from '../../../Models/Lists';
 import { ListsService } from '../../../services/lists.service';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  DragDropModule,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
@@ -56,5 +61,39 @@ export class ListComponent implements OnInit {
         this.lists = data;
       });
     });
+  }
+  drop(event: any) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+      this.listService
+        .addCardsToList(
+          this.lists[event.container.id]._id,
+          this.lists[event.container.id].cards
+        )
+        .subscribe();
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+      this.listService
+        .addCardsToList(
+          this.lists[event.container.id]._id,
+          this.lists[event.container.id].cards
+        )
+        .subscribe();
+      this.listService
+        .addCardsToList(
+          this.lists[event.previousContainer.id]._id,
+          this.lists[event.previousContainer.id].cards
+        )
+        .subscribe();
+    }
   }
 }

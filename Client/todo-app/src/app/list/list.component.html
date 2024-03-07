@@ -7,9 +7,15 @@
   />
   <button class="" (click)="addList()">Add new List</button>
 </div>
-<div class="conatiner">
-  <div class="grid-container" *ngFor="let list of lists">
-    <div class="list">
+<div class="conatiner" cdkDropListGroup>
+  <div class="grid-container" *ngFor="let list of lists; let i = index">
+    <div
+      class="list"
+      id="{{ i }}"
+      cdkDropList
+      [cdkDropListData]="lists[i].cards"
+      (cdkDropListDropped)="drop($event)"
+    >
       <div class="header">
         <table class="table">
           <th class="table-head">
