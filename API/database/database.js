@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
-const URI = "mongodb://localhost:27017/todo-app";
+dotenv.config();
+
+const URI = process.env.URI;
 
 async function connectDB() {
   try {
