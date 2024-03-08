@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { List } from '../../../Models/Lists';
 import { ListsService } from '../../../services/lists.service';
 import {
-  CdkDragDrop,
   DragDropModule,
   moveItemInArray,
   transferArrayItem,
