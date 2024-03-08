@@ -1,13 +1,16 @@
 <div class="addNewList">
   <input
+    class="form-control"
     type="text"
     id="newList"
     [(ngModel)]="newListName"
     placeholder="Enter a new list name"
   />
-  <button class="" (click)="addList()">Add new List</button>
+  <button class="btn btn-primary addListBTN" (click)="addList()">
+    Add new List
+  </button>
 </div>
-<div class="conatiner" cdkDropListGroup>
+<div class="container" cdkDropListGroup>
   <div class="grid-container" *ngFor="let list of lists; let i = index">
     <div
       class="list"
@@ -22,7 +25,7 @@
             <div class="title">{{ list.listName }}</div>
             <button
               type="button"
-              class="deleteListBTN"
+              class="deleteListBTN btn"
               (click)="deleteList(list._id)"
             >
               X

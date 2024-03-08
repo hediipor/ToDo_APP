@@ -10,17 +10,55 @@
   margin-bottom: 0.6rem;
   word-wrap: break-word;
   cursor: pointer;
+  border-color: #fff;
 }
 
-.card {
+.card-body {
   display: flex;
+}
+.card-body-when-editing {
+  display: block;
+}
+.cardBTN {
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #807b7b;
 }
 tr.cdk-drag.Card-row {
   display: block;
 }
-
-.cardButtons {
+.addBTN {
+  background: #d3b1c5;
+  border: #d391fa;
+  color: black;
+  font-weight: 600;
+}
+.card border rounded mt-3 {
+  display: flex;
+}
+.button-group {
   gap: 0.5rem;
   display: flex;
   margin-left: auto;
+}
+.update-container {
+  display: flex;
+}
+.update-btn {
+  text-align: right;
+  margin-left: auto;
+}
+.cancelBTN {
+  background: #ddd8d8;
+  border: #ccc;
+  color: black;
+}
+
+.addCardRow {
+  border-color: white;
 }

@@ -38,21 +38,12 @@ export class ListComponent implements OnInit {
     });
   }
   addList(): void {
-    if (this.newListName.trim() !== '') {
-      this.listService.addList(this.newListName).subscribe(
-        () => {
-          this.listService.refreshLists().subscribe((data: any) => {
-            this.lists = data;
-          });
-          this.newListName = '';
-        },
-        (error) => {
-          console.error('Error adding list:', error);
-        }
-      );
-    } else {
-      alert('List name cannot be empty');
-    }
+    this.listService.addList(this.newListName).subscribe(() => {
+      this.listService.refreshLists().subscribe((data: any) => {
+        this.lists = data;
+      });
+      this.newListName = '';
+    });
   }
 
   deleteList(listID: String) {

@@ -2,11 +2,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 15px;
 }
-
+.form-control {
+  width: 500px;
+}
+.addListBTN {
+  background: #e7dde1;
+  border: #d391fa;
+  color: black;
+  font-weight: 400;
+}
+.container {
+  justify-content: center;
+}
 .grid-container {
   display: inline-grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: 400px;
   grid-template-rows: 450px;
   gap: 5px;
 
@@ -17,15 +29,17 @@
 .list {
   flex: 0 0 27rem;
   display: flex;
+  height: auto;
   flex-direction: column;
-  background-color: white;
+
   border-radius: 0.3rem;
   margin-right: 1rem;
 }
-
+.header {
+  background-color: white;
+  border-radius: 5%;
+}
 .table-head {
-  border: #4d4d4d solid 1px;
-
   margin-left: 0px;
   display: flex;
   justify-content: space-between;
@@ -33,6 +47,7 @@
 
 .title {
   justify-content: space-between;
+  margin: 15px;
   margin-left: 0%;
   font-size: 1.4rem;
   font-weight: 700;
@@ -43,5 +58,10 @@
 }
 
 .deleteListBTN {
-  float: right;
+  margin: 15px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  font-weight: 700;
 }

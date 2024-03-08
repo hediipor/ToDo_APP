@@ -1,44 +1,80 @@
-<tr class="Card-row" *ngFor="let item of CurrentList.cards" cdkDrag>
-  <div>
-    <div class="card">
-      <div class="cardItem">
+<tr *ngFor="let item of CurrentList.cards" class="Card-row table-row" cdkDrag>
+  <td class="card border rounded">
+    <div
+      [ngClass]="
+        isEditing.get(CurrentList._id.toString())?.get(item.toString())
+          ? 'card-body-when-editing'
+          : 'card-body'
+      "
+    >
+      <div
+        *ngIf="!isEditing.get(CurrentList._id.toString())?.get(item.toString())"
+      >
         {{ item }}
       </div>
 
-      <div class="cardButtons">
+      <div
+        class="button-group ml-auto"
+        *ngIf="!isEditing.get(CurrentList._id.toString())?.get(item.toString())"
+      >
         <button
           type="button"
-          class="deleteBTN"
+          class="cardBTN btn"
           (click)="deleteCard(CurrentList._id, item)"
         >
           X
         </button>
         <button
           type="button"
-          class="updateBTN"
+          class="cardBTN btn"
           (click)="toggleEditing(CurrentList._id.toString(), item)"
         >
           U
         </button>
       </div>
-
       <div
+        class="update-container"
         *ngIf="isEditing.get(CurrentList._id.toString())?.get(item.toString())"
       >
-        <input [(ngModel)]="newCardName" placeholder="New Card Name" />
-        <button (click)="updateCard(CurrentList._id, item, newCardName)">
-          Update Card
-        </button>
-        <button (click)="toggleEditing(CurrentList._id.toString(), item)">
-          Cancel
-        </button>
+        <div>
+          <input
+            [(ngModel)]="newCardName"
+            class="form-control mb-2"
+            placeholder="{{ item }}"
+          />
+        </div>
+        <div class="update-btn">
+          <button
+            (click)="updateCard(CurrentList._id, item, newCardName)"
+            class="addBTN btn btn-success mr-2"
+          >
+            Update Card
+          </button>
+          <button
+            (click)="toggleEditing(CurrentList._id.toString(), item)"
+            class="btn btn-secondary cancelBTN"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  </td>
 </tr>
 <tr class="addCardRow">
-  <input [(ngModel)]="newCard" placeholder="Enter a new card" />
-  <button class="addCard" (click)="addCardsToList(CurrentList._id)">
-    add card to list
-  </button>
+  <td>
+    <input
+      [(ngModel)]="newCard"
+      class="form-control"
+      placeholder="Enter a new card"
+    />
+  </td>
+  <td>
+    <button
+      class="addBTN btn btn-primary"
+      (click)="addCardsToList(CurrentList._id)"
+    >
+      Add Card to List
+    </button>
+  </td>
 </tr>

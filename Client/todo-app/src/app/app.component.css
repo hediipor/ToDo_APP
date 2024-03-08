@@ -1,10 +1,11 @@
 .head {
   background-color: #8e99ed;
 
-  height: 60px;
+  height: 80px;
   margin: -16px -8px;
 }
 .text-center {
+  margin: 25px;
   text-align: center;
   font-size: 24px;
   color: #fff;
